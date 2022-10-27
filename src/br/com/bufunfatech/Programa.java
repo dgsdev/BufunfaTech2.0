@@ -16,7 +16,7 @@ public class Programa {
 			for (Usuario usuario : listaUsuarios) {
 				System.out.println(usuario);
 			}
-			System.out.println(listaUsuarios);
+			//System.out.println(listaUsuarios);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

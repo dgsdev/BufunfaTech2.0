@@ -21,26 +21,27 @@ public class UsuarioDAO {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "RM93863", "031188");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/XEPDB1", "bufunfatech", "fiap");
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM USUARIO");
 			
 			while ( rs.next() ) {
 				Usuario usuario = new Usuario();
-				usuario.setIdUsuario( rs.getInt("ID") );
+				usuario.setIdUsuario( rs.getInt("ID_USUARIO") );
 				usuario.setNome( rs.getString("NOME") );
 				usuario.setEmail( rs.getString("EMAIL") );
+				usuario.setSenha(rs.getString("SENHA") );
+				usuario.setRepetirSenha( rs.getString("REPETIR_SENHA") );				
 				
 				listaUsuarios.add(usuario);				
 			} 
-			System.out.println(listaUsuarios);
+			conn.close();
 			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			conn = null;
-		}
-		
+		}		
 		
 		return listaUsuarios;
 	}
